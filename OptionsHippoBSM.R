@@ -5,7 +5,6 @@ OptionPrice = function(S, K, sigma, r, q, ttm, type)
   
   d1 = (log(S / K) + (b + sigma ^ 2 / 2) * t) / (sigma * sqrt(t))
   d2 = d1 - sigma * sqrt(t)
-  
   if(type == "call")
   {
     price = S * exp((b - r) * t) * pnorm(d1) - K * exp(-r * t) * pnorm(d2)
