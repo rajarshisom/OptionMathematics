@@ -1,6 +1,4 @@
 
-#' @export
-#Return option price
 OptionPrice = function(S, K, sigma, r, q, ttm, type)
 {
   b = r - q
@@ -107,7 +105,6 @@ OptionDelta = function (S, K, sigma, r, q, ttm, type)
   
   return(delta)
 }
-
 
 OptionTheta = function (S, K, sigma, r, q, ttm, type)
 {
