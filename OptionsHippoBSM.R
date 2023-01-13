@@ -1,3 +1,12 @@
+
+OptionVega = function (S, K, sigma, r, q, ttm, type)
+{
+  b = r - q
+  t = ttm/365
+  d1 = (log(S / K) + (b + sigma ^ 2 / 2) * t) / (sigma * sqrt(t))
+  return  (S * sqrt(t) * dnorm(d1))
+}
+
 OptionPrice = function(S, K, sigma, r, q, ttm, type)
 {
   b = r - q
@@ -16,14 +25,6 @@ OptionPrice = function(S, K, sigma, r, q, ttm, type)
   }
   
   return(price)
-}
-
-OptionVega = function (S, K, sigma, r, q, ttm, type)
-{
-  b = r - q
-  t = ttm/365
-  d1 = (log(S / K) + (b + sigma ^ 2 / 2) * t) / (sigma * sqrt(t))
-  return  (S * sqrt(t) * dnorm(d1))
 }
 
 OptionIV = function (S, K, price, r, q, ttm, type)
