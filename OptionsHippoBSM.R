@@ -1,5 +1,3 @@
-
-
 OptionPrice = function(S, K, sigma, r, q, ttm, type)
 {
   b = r - q
