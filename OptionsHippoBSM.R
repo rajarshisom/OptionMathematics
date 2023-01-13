@@ -1,4 +1,5 @@
 
+
 OptionPrice = function(S, K, sigma, r, q, ttm, type)
 {
   b = r - q
@@ -9,11 +10,11 @@ OptionPrice = function(S, K, sigma, r, q, ttm, type)
   
   if(type == "call")
   {
-    price <- S * exp((b - r) * t) * pnorm(d1) - K * exp(-r * t) * pnorm(d2)
+    price = S * exp((b - r) * t) * pnorm(d1) - K * exp(-r * t) * pnorm(d2)
   }
   else if (type == "put")
   {
-    price <-  (K * exp(-r * t) * pnorm(-d2) - S * exp((b - r) * t) * pnorm(-d1))
+    price = (K * exp(-r * t) * pnorm(-d2) - S * exp((b - r) * t) * pnorm(-d1))
   }
   
   return(price)
@@ -26,7 +27,6 @@ OptionVega = function (S, K, sigma, r, q, ttm, type)
   d1 = (log(S / K) + (b + sigma ^ 2 / 2) * t) / (sigma * sqrt(t))
   return  (S * sqrt(t) * dnorm(d1))
 }
-
 
 OptionIV = function (S, K, price, r, q, ttm, type)
 {
@@ -43,9 +43,7 @@ OptionIV = function (S, K, price, r, q, ttm, type)
       return (0.00001)
     
     diff = price - value
-    
-    #print(c(vol, value))
-    
+
     if (abs(diff) < precision)
       return (vol)
     else 
