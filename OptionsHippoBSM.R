@@ -19,7 +19,7 @@ OptionPrice = function(S, K, sigma, r, q, ttm, type)
   {
     price = S * exp((b - r) * t) * pnorm(d1) - K * exp(-r * t) * pnorm(d2)
   }
-  else if (type == "put")
+  else
   {
     price = (K * exp(-r * t) * pnorm(-d2) - S * exp((b - r) * t) * pnorm(-d1))
   }
@@ -82,7 +82,7 @@ OptionRho = function(S, K, sigma, r, q, ttm, type)
   
   if(type == "call")
     rho =  K * t * exp(-r*t) * pnorm (d2)
-  else if (type == "put")
+  else
     rho = -K * t * exp(-r*t) * pnorm (-d2)
   
   return (rho)
@@ -97,7 +97,7 @@ OptionDelta = function (S, K, sigma, r, q, ttm, type)
   
   if(type == "call")
     delta = exp(-q * t) * pnorm(d1)
-  else if (type == "put")
+  else
     delta =  exp(-q * t) * (pnorm(d1)-1)
   
   return(delta)
@@ -113,7 +113,7 @@ OptionTheta = function (S, K, sigma, r, q, ttm, type)
   
   if(type == "call")
     theta = -S*dnorm(d1)*sigma*exp(-q*t) / (2 * sqrt(t)) + q*S*pnorm(d1)*exp(-q*t) - r*K*exp(-r*t)*pnorm(d2)
-  else if (type == "put")
+  else
     theta = -S*dnorm(d1)*sigma*exp(-q*t) / (2 * sqrt(t)) - q*S*pnorm(d1)*exp(-q*t) + r*K*exp(-r*t)*pnorm(d2)
 
   return(theta)   
