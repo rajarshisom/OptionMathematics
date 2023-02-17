@@ -29,24 +29,26 @@ OptionPrice = function(S, K, sigma, r, q, ttm, type)
 
 OptionIV = function (S, K, price, r, q, ttm, type)
 {
-  maxIter = 100
+  maxIter = 1000
   precision = 0.000000001
   
   vol = 0.20 #initial guess
   for (i in 1:maxIter)
   {
-    value = OptionPrice (S=S, K=K, sigma=vol, r=r, q=q, ttm=ttm, type=type)
-    vega = OptionVega (S=S, K=K, sigma=vol, r=r, q=q, ttm=ttm, type=type)
+    value = try (OptionPrice (S=S, K=K, sigma=vol, r=r, q=q, ttm=ttm, type=type))
+    vega = try (OptionVega (S=S, K=K, sigma=vol, r=r, q=q, ttm=ttm, type=type))
     
     if (vega==0)
-      return (0.00001)
-    
-    diff = price - value
-
-    if (abs(diff) < precision)
-      return (vol)
-    else 
-      vol = vol + 0.5 * diff / vega
+      return (NA)
+    else
+    {
+      diff = price - value
+      
+      if (abs(diff) < precision)
+        return (vol)
+      else 
+        vol = vol + 0.5 * diff / vega
+    }
    }
   
   return(vol)
@@ -69,7 +71,7 @@ OptionVolga = function(S, K, sigma, r, q, ttm, type)
   d1 = (log(S / K) + (b + sigma ^ 2 / 2) * t) / (sigma * sqrt(t))
   d2 = d1 - sigma * sqrt(t)
   
-  return (S * sqrt(t) * dnorm(d1) * d1 * d2 / sigma)
+  return (sqrt(t) * dnorm(d1) * d1 * d2 / sigma)
 }
 
 OptionRho = function(S, K, sigma, r, q, ttm, type)
